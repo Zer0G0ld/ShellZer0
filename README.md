@@ -1,6 +1,6 @@
 <div align="center">
   <img src="src/$ SHELL ZERO.png" alt="Shell Zero">
-  <p>Odin-Hat or Zer0 - Autor</p>
+  <p>Zer0 - Autor</p>
 </div>
 
 # About
