@@ -140,6 +140,7 @@ venv.bak/
 #/site
 history/
 ShellZero/
+.history
 
 # mypy
 .mypy_cache/
