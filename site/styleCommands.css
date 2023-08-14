@@ -20,13 +20,13 @@ body, header {
 
 .material-symbols-outlined:after {
     font-family: "Font Awesome 5 Free";
-    font-weight: 900;
+    font-weight: 800;
     content: "\f015"; /* Ícone de casa do FontAwesome */
     font-size: 24px; /* Ajuste o tamanho do ícone conforme necessário */
     position: absolute;
-    right: 0; /* Posiciona o ícone à direita */
+    right: 60vh; /* Posiciona o ícone à direita */
     top: 50%; /* Centraliza verticalmente */
-    transform: translateY(-50%); /* Centraliza verticalmente */
+    transform: translateY(50%); /* Centraliza verticalmente */
 }
 
 
