@@ -28,13 +28,21 @@
 
 | Method    | Command                                                                                           |
 | :-------- | :------------------------------------------------------------------------------------------------ |
-| **curl**  | `curl -L -o ShellZero.zip https://github.com/Odin-Hat/ShellZero/archive/refs/heads/main.zip` |
-| **wget**  | `wget https://github.com/Odin-Hat/ShellZero/archive/refs/heads/main.zip -O ShellZero.zip`   |
-| **git** | `git clone https://github.com/Odin-Hat/ShellZero.git` |
+| **curl**  | `curl -L -o ShellZero.zip https://github.com/Zer0G0ld/ShellZero/archive/refs/heads/main.zip` |
+| **wget**  | `wget https://github.com/Zer0G0ld/ShellZero/archive/refs/heads/main.zip -O ShellZero.zip`   |
+| **git** | `git clone https://github.com/Zer0G0ld/ShellZero.git` |
+
+### Unzip
+
+| Method    | Command to unzip                                                                                 |
+| :-------- | :------------------------------------------------------------------------------------------------ |
+| **curl**  | `unzip ShellZero.zip` |
+| **wget**  | `unzip ShellZero.zip`   |
+| **git** | `cd ShellZero` |
+
 
 ### Using Shell Zero
 ```
-cd ShellZero
 chmod +x start.sh
 ./start.sh
 help
