@@ -1,3 +1,5 @@
+[![Deploy static content to Pages](https://github.com/Zer0G0ld/ShellZero/actions/workflows/static.yml/badge.svg?branch=gh-pages)](https://github.com/Zer0G0ld/ShellZero/actions/workflows/static.yml)
+
 <div align="center">
   <img src="src/$ SHELL ZERO.png" alt="Shell Zero">
   <p>Zer0 or Zer0G0ld - Autor</p>
@@ -15,3 +17,4 @@ more information on [Branch Main](https://github.com/Zer0G0ld/ShellZero/tree/mai
 ## License
 
 Shell Zero is released under the [Apache License 2.0](https://github.com/Zer0G0ld/ShellZero/blob/main/LICENSE) 
+
