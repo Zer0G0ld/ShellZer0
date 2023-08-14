@@ -1,6 +1,6 @@
 <div align="center">
   <img src="src/$ SHELL ZERO.png" alt="Shell Zero">
-  <p>Zer0 - Autor</p>
+  <p>Zer0 or Zer0G0ld - Autor</p>
 </div>
 
 # About
@@ -60,4 +60,4 @@ Setting...
 
 ## License
 
-Shell Zero is released under the [Apache License 2.0](https://github.com/Odin-Hat/ShellZero/blob/main/LICENSE) 
+Shell Zero is released under the [Apache License 2.0](https://github.com/Zer0G0ld/ShellZero/blob/main/LICENSE) 
