@@ -3,7 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-
 # C extensions
 *.so
 
@@ -137,9 +136,7 @@ venv.bak/
 .ropeproject
 
 # mkdocs documentation
-#/site
-history/
-ShellZero/
+/site
 
 # mypy
 .mypy_cache/

@@ -138,8 +138,6 @@ venv.bak/
 
 # mkdocs documentation
 #/site
-history/
-ShellZero/
 
 # mypy
 .mypy_cache/
