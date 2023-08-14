@@ -1,5 +1,5 @@
 import os
-from commands import base
+from commands import base 
 from commands.platformSys import get_operating_system
 
 # Usando o pycharm para editar use o pyinstaller para criar um executavel para usar no terminal como no terminal
