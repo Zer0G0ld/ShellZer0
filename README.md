@@ -1,5 +1,3 @@
-[![Deploy static content to Pages](https://github.com/Zer0G0ld/ShellZero/actions/workflows/main.yml/badge.svg)](https://github.com/Zer0G0ld/ShellZero/actions/workflows/main.yml)
-
 <div align="center">
   <img src="src/$ SHELL ZERO.png" alt="Shell Zero">
   <p>Zer0 or Zer0G0ld - Autor</p>
