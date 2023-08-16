@@ -1,6 +1,10 @@
+import PSCommands
 import subprocess
+import threading
+import time
 import os
-from commands.platformSys import get_operating_system
+from platformSys import get_operating_system
+
 
 # Mensagens de erro
 ERR_INVALID_COMMAND = "Comando inválido ou não suportado."
@@ -95,6 +99,62 @@ def print_working_directory():
 #        print()
 #    except Exception
 
+def touch():
+    try:
+        if os.name == 'posix':
+            newFile = input("Nome do arquivo: ")
+            os.system('touch {}'.format(newFile))
+        elif os.name == 'nt':
+            newFile = input("Nome do arquivo: ")
+            os.system('type null > {}'.format(newFile))
+    except Exception as error:
+        print('Error ao tentar criar um arquivo: ' + str(error))
+
+def top():
+    try:
+        def top_with_timeout(timeout):
+            top_thread = threading.Thread(target=top)
+            top_thread.start()
+            top_thread.join(timeout)
+            
+            if top_thread.is_alive():
+                print('A execução do top excedeu o tempo limite e será interrompida.')
+                # Aqui você pode tentar encerrar a execução do processo top, mas tenha cuidado
+                # pois interromper processos pode causar problemas.
+                # Consulte a documentação do sistema operacional para fazer isso corretamente.
+                # Exemplo (somente Linux): os.system('pkill top')
+                
+        if os.name == 'posix':
+            os.system('top')
+            timeoutSegunds = 10
+            top_with_timeout(timeoutSegunds)
+            print('A execução do top excedeu o tempo limite e será interrompida.')
+        elif os.name == 'nt':
+            os.system('qprocess')
+            timeoutSegunds = 10
+            top_with_timeout(timeoutSegunds)
+            print('A execução do top excedeu o tempo limite e será interrompida.')
+        else:
+            print('Não foi possível listar o desempenho do sistema.')
+            if os.name == 'nt':
+                os.system('qprocess --help')
+            elif os.name == 'posix':
+                os.system('top -h')
+    except Exception as error:
+        print('Erro ao tentar listar o desempenho do sistema:', error)
+
+def ps():
+    try:
+        if os.name == 'posix':
+            os.system('ps aux')
+        elif os.name == 'nt':
+            os.system('tasklist')
+        else:
+            print('Não foi possível listar os processos.')
+    except Exception as error:
+        print('Erro ao tentar listar os processos:', error)
+    
+    
 def show_help():
     print('''Shell Zero é um projeto de linha de comando baseado em em sistemas unix e podendo ser utilizado para windows também
           
@@ -106,6 +166,9 @@ def show_help():
             mkdir     -     Cria diretórios
             rm        -     Remove diretórios
             pwd       -     Mostra o caminho atual
+            top       -     Lista processos
+            ps        -     Lista os processos ativos do sistema
+            exit      -     Sai da sessão atual
             hello     -     Imprime uma mensagem de Zer0 ;)
           
           ''')
