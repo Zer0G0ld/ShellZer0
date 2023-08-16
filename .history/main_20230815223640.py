@@ -36,7 +36,7 @@ command_mapping = {
     "mkdir": base.make_directory,
     "rm": base.remove,
     "pwd": base.print_working_directory,
-    "ps": base.ps,
+    
     "help": base.show_help,
     "hello": base.say_hello
 }
