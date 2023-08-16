@@ -137,9 +137,13 @@ venv.bak/
 .ropeproject
 
 # mkdocs documentation
-#/site
-history/
-ShellZero/
+/site
+/ShellZero
+
+.vscode/
+.github/
+.history/
+
 
 # mypy
 .mypy_cache/
