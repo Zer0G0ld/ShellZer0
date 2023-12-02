@@ -3,7 +3,10 @@ import json
 
 try:
     # Colocar módulos criados aqui dentro da try 
-    import base
+    from commands.base import *
+    from commands.platformSys import *
+    from commands.PSCommands import *
+    
 except ImportError:
     # Se falhar, imprimir mensagem e criar um módulo base simulado
     print("Erro: Módulo não encontrado. Criando um móluo base simulado.")
