@@ -1,11 +1,69 @@
 import os
-from commands import base
-from commands.platformSys import get_operating_system
+import json
 
-# Usando o pycharm para editar use o pyinstaller para criar um executavel para usar no terminal como no terminal
-# Use o comando : pyinstaller --onefile app.py --distpath C:\Users\mathe\PycharmProjects\shellzero\exe
+try:
+    # Colocar módulos criados aqui dentro da try 
+    import base
+except ImportError:
+    # Se falhar, imprimir mensagem e criar um módulo base simulado
+    print("Erro: Módulo não encontrado. Criando um móluo base simulado.")
+    class BaseSimulado:
+        @staticmethod
+        def clear_screen():
+            pass
 
-def executeCommand(command):
+        @staticmethod
+        def list_dir():
+            pass
+
+        @staticmethod
+        def change_directory():
+            pass
+
+        @staticmethod
+        def make_directory():
+            pass
+
+        @staticmethod
+        def remove():
+            pass
+
+        @staticmethod
+        def print_working_directory():
+            pass
+
+        @staticmethod
+        def ps():
+            pass
+
+        @staticmethod
+        def show_help():
+            pass
+
+        @staticmethod
+        def say_hello():
+            pass
+
+    base = BaseSimulado()
+
+json_fileName = "mapping.json"
+
+try:
+    with open(json_fileName, 'r') as json_file:
+        read_command_mapping = json.load(json_file)
+
+        if isinstance(read_command_mapping, dict):
+            print("Leitura bem-sucedida: ")
+            print(read_command_mapping)
+        else:
+            print("Falha na leitura do JSON.")
+except FileNotFoundError:
+    print(f"Arquivo {json_fileName} não encontrado. Certifique-se de executar o script que cria o mapeamento primeiro.")
+except json.JSONDecodeERROR:
+    print(f"Falha ao decodificar o JSON no arquivo {json_fileName}. Certifique-se de que o conteúdo seja um JSON válido.")
+
+
+def excuteCommand(command):
     return base.executeCommand(command)
 
 def whoami():
@@ -14,34 +72,30 @@ def whoami():
 def get_user_input():
     def PathPwd():
         try:
-            path = os.getcwd()
-        except Exception as error:
-            path = 'Erro ao tentar mostrar o caminho: ' + str(error)
-        return path
-    
+            path = os.getwcd()
+            return path
+        except Exception as Error:
+            print("Erro ao tentar mostrar o caminho : " + str(Error))
+            return None
+        
     name = whoami()
     pwd_path = PathPwd()
-    directories = pwd_path.split(os.path.sep)
-    last_dir = directories[-1]
-    second_dir = directories[-2] if len(directories) >= 2 else ''
+    
+    if pwd_path is not None:
+        directories = pwd_path.split(os.path.sep)
+        last_dir = directories[-1]
+        second_dir = directories[-2] if len(directories) >= 2 else ''
+    else:
+        last_dir = ''
+        second_dir = ''
 
-    print("┌──(ShellZero㉿{})-[{}]".format(os.path.join(name), os.path.join(second_dir, last_dir)))
-    return input("└─$ ")
+    print("┌──(ShellZero㉿{})-[{}]".format(os.path.join(name), os.path.join(second_dir, last_dir), str(last_dir)) if pwd_path is not None else '')
+    return input("└─$  ")
 
-# Mapeando comandos para funções
 command_mapping = {
-    "clear": base.clear_secreen,
-    "ls": base.list_dir,
-    "cd": base.change_directory,
-    "mkdir": base.make_directory,
-    "rm": base.remove,
-    "pwd": base.print_working_directory,
-    "ps": base.ps,
-    "help": base.show_help,
-    "hello": base.say_hello
+    "clear"
 }
 
-# Função principal
 def main():
     while True:
         user_input = get_user_input()
@@ -51,24 +105,20 @@ def main():
             _, target = user_input.split(" ", 1)
             base.remove(target=target)
         elif user_input.lower() == "cd ..":
-            #erroEncontrado = "Erro ao retornar ao diretório anterior."
             try:
                 os.chdir("..")
-            except Exception as error:
-                erroEncontrado = "Erro ao retornar ao diretório anterior: " + str(error)
-            print(erroEncontrado)
+            except Exception as Error:
+                erroEncontrado = "Erro ao retornar ao diretório anterior: " + str(Error)
+                return erroEncontrado
+            
         elif " " in user_input:
             command, argument = user_input.split(" ", 1)
             if command.lower() in command_mapping:
-                command_function = command_mapping[command.lower()]
-                command_function(argument)
+                command_function = command_mapping[user_input.lower()]
+                command_function()
             else:
                 executeCommand(user_input)
-        elif user_input.lower() in command_mapping:
-            command_function = command_mapping[user_input.lower()]
-            command_function()
-        else:
-            executeCommand(user_input)
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     main()
