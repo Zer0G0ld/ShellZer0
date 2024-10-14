@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="V1.0/src/$ SHELL ZERO.png" alt="Shell Zero">
+  <img src="/img/$ SHELL ZERO.png" alt="Shell Zero">
   <p>Zer0 ou Zer0G0ld - Autor</p>
 </div>
 
