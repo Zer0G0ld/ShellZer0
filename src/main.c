@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
-void execute_command(char **args);
-char **parse_input(char *input);
+#include "shell.h"
 
 int main() {
     char *input = NULL;
@@ -12,10 +10,9 @@ int main() {
     char **args;
 
     while (1) {
-        printf("ShellZer0> "); // Exibe o prompt da shell
-        getline(&input, &len, stdin); // Lê a entrada do usuário
-
-        input[strlen(input) - 1] = '\0'; // Remove o '\n'
+        printf("ShellZer0> ");
+        getline(&input, &len, stdin);
+        input[strlen(input) - 1] = '\0'; // Remove o \n
 
         args = parse_input(input);
 
@@ -23,11 +20,23 @@ int main() {
             break;
         }
 
-        execute_command(args);
+        if (strcmp(args[0], "cd") == 0) {
+            if (args[1] == NULL) {
+                fprintf(stderr, "ShellZer0: argumento esperado para \"cd\"\n");
+            } else {
+                if (chdir(args[1]) != 0) {
+                    perror("ShellZer0");
+                }
+            }
+            continue;
+        }
 
-        free(args); // Libera a memória dos argumentos
+        execute_command(args); // Executa comandos externos
+
+        free(args);
     }
 
-    free(input); // Libera a memória de input
+    free(input);
     return 0;
 }
+

@@ -1,6 +1,6 @@
 # Definindo variáveis
 CC = gcc
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -Iinclude
 SRC = src/main.c src/parser.c src/exec.c
 OBJ_DIR = build/obj
 OBJ = $(SRC:src/%.c=$(OBJ_DIR)/%.o)
