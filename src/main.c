@@ -3,7 +3,6 @@
 #include <string.h>
 #include <unistd.h>
 
-// Funções que serão implementadas em outros arquivos
 void execute_command(char **args);
 char **parse_input(char *input);
 
@@ -16,24 +15,19 @@ int main() {
         printf("ShellZer0> "); // Exibe o prompt da shell
         getline(&input, &len, stdin); // Lê a entrada do usuário
 
-        // Remove o caractere de nova linha ('\n) ao final do input
-        input[strlen(input) - 1] = '\0';
+        input[strlen(input) - 1] = '\0'; // Remove o '\n'
 
-        // Parseia o comando e seus argumentos
         args = parse_input(input);
 
-        // Se o comando for "exit", encerra o shell
         if (strcmp(args[0], "exit") == 0) {
             break;
         }
 
-        // Executa o comando
         execute_command(args);
 
-        // Libera a memória alocada para os argumentos
-        free(args);
+        free(args); // Libera a memória dos argumentos
     }
 
-    free(input); // Libera a memória alocada para a entrada
+    free(input); // Libera a memória de input
     return 0;
 }
