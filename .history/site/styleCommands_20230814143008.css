@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+body, header {
+    background: white;
+    color: black;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.material-symbols-outlined {
+    text-decoration: none; /* Remove a sublinhado padrão dos links */
+    display: inline-block; /* Permite definir largura e altura */
+    padding-right: 20px; /* Espaço entre o texto do link e o ícone */
+    position: relative; /* Necessário para posicionar o ícone corretamente */
+}
+
+.material-symbols-outlined:after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 800;
+    content: "\f015"; /* Ícone de casa do FontAwesome */
+    font-size: 24px; /* Ajuste o tamanho do ícone conforme necessário */
+    position: absolute;
+    right: 60%; /* Posiciona o ícone à direita */
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(50%); /* Centraliza verticalmente */
+}
+
+
+pre {
+    background-color: #292929;
+    color: #00FF00;
+    padding: 10px;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+
+pre p {
+    margin: 0;
+    color: #FFFFFF;
+}
+
+footer {
+    background: whitesmoke;
+    font-style: italic;
+    color: black;
+}
