@@ -16,7 +16,11 @@ char **parse_input(char *input) {
 
     token = strtok(input, DELIM);
     while (token != NULL) {
-        tokens[i] = token;
+        tokens[i] = strdup(token);  // Copia o token para garantir uma string independente
+        if (!tokens[i]) {
+            fprintf(stderr, "Erro de alocação de memória para token\n");
+            exit(EXIT_FAILURE);
+        }
         i++;
 
         if (i >= bufsize) {
