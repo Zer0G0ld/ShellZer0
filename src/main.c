@@ -4,9 +4,12 @@
 #include <unistd.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "parser.h"  // Inclua o arquivo de cabeçalho do parser
+
+// Declaração do protótipo de parse_input
+char **parse_input(char *input);
 
 void execute_command(char **args);
-char **parse_input(char *input);
 
 // Função para exibir a mensagem personalizada
 void display_welcome_message() {
@@ -31,6 +34,7 @@ void display_welcome_message() {
     }
 }
 
+// Função main sem a definição de parse_input
 int main() {
     char *input;
     char **args, cwd[1024], *home, *last_dir;
