@@ -1,6 +1,7 @@
 # Definindo variáveis
 CC = gcc
 CFLAGS = -Wall -g -Iinclude
+LDFLAGS = -lreadline
 SRC = src/main.c src/parser.c src/exec.c
 OBJ_DIR = build/obj
 OBJ = $(SRC:src/%.c=$(OBJ_DIR)/%.o)
@@ -15,7 +16,7 @@ $(OBJ_DIR):
 
 # Linkando os arquivos objeto
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ) $(LDFLAGS)
 
 # Compilação dos arquivos de objeto
 $(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
@@ -24,3 +25,4 @@ $(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
 # Limpeza dos arquivos gerados
 clean:
 	rm -rf build $(TARGET)
+

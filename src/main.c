@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 void execute_command(char **args);
 char **parse_input(char *input);
 
 int main() {
-    char *input = NULL;
-    size_t len = 0;
+    char *input;
     char **args, cwd[1024], *home, *last_dir;
     char *user = getenv("USER");
 
@@ -38,18 +39,27 @@ int main() {
             perror("getcwd");
         }
 
-        getline(&input, &len, stdin);  // Lê a entrada
-        input[strlen(input) - 1] = '\0';  // Remove o '\n'
+        // Use readline para capturar a entrada do usuário com histórico
+        input = readline("");  // Exibe o prompt
+
+        // Adiciona o comando ao histórico, se não for nulo ou vazio
+        if (input && *input) {
+            add_history(input);
+        }
 
         args = parse_input(input);
 
-        if (strcmp(args[0], "exit") == 0) break;
+        if (strcmp(args[0], "exit") == 0) {
+            free(input);
+            break;
+        }
 
         execute_command(args);
+
         free(args);  // Libera a memória dos argumentos
+        free(input);  // Libera a memória de input
     }
 
-    free(input);  // Libera a memória de input
     return 0;
 }
 
