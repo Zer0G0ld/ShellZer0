@@ -4,7 +4,8 @@
 #include <unistd.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "parser.h"  // Inclua o arquivo de cabeçalho do parser
+#include <signal.h>  
+#include "parser.h"  
 
 // Declaração do protótipo de parse_input
 char **parse_input(char *input);
@@ -34,6 +35,11 @@ void display_welcome_message() {
     }
 }
 
+// Função para tratar o sinal SIGINT (Ctrl+C)
+void handle_sigint(int sig) {
+    printf("\nInterrupção recebida (Ctrl+C). Digite 'exit' para sair.\n");
+}
+
 // Função main sem a definição de parse_input
 int main() {
     char *input;
@@ -47,6 +53,9 @@ int main() {
 
     // Exibe a mensagem personalizada no início
     display_welcome_message();
+
+    // Captura o sinal SIGINT (Ctrl+C)
+    signal(SIGINT, handle_sigint);
 
     while (1) {
         // Obtém o diretório atual
