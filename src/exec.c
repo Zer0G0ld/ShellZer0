@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <string.h>
-#include "stat.h"
+#include <sys/stat.h>
 
 void file_info(char *filename) {
     struct stat filestat;

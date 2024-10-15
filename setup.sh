@@ -31,14 +31,26 @@ install_debian_dependencies() {
     sudo apt install -y gcc make libreadline-dev
 }
 
+# Função para perguntar ao usuário
+prompt_user() {
+    read -p "Deseja instalar as dependências? (s/N): " resposta
+    resposta=${resposta,,}  # Converte para minúsculas
+    if [[ "$resposta" != "s" ]]; then
+        echo "Instalação de dependências cancelada."
+        exit 0
+    fi
+}
+
 # Função principal
 setup() {
     detect_os
     if [[ $? -eq 1 ]]; then
         # Se for Termux
+        prompt_user
         install_termux_dependencies
     elif [[ $? -eq 0 ]]; then
         # Se for Debian/WSL
+        prompt_user
         install_debian_dependencies
     fi
 

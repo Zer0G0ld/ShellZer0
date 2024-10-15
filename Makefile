@@ -17,7 +17,7 @@ ifeq ($(findstring Android, $(UNAME)), Android)
 else
     # Ambiente Debian/WSL
     LDFLAGS = -lreadline
-    CFLAGS += -I/usr/include/readline
+    CFLAGS += -I/usr/include
 endif
 
 # Regra principal
