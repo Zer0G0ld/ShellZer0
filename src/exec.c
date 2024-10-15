@@ -2,14 +2,29 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <string.h>
 
 void execute_command(char **args) {
     pid_t pid;
     int status;
 
+    // Verifica se o comando é 'cd' e trata ele diretamente
+    if (strcmp(args[0], "cd") == 0) {
+        if (args[1] == NULL) {
+            fprintf(stderr, "ShellZer0: esperado argumento para 'cd'\n");
+        } else {
+            if (chdir(args[1]) != 0) {
+                perror("ShellZer0");
+            }
+        }
+        return; // Não prosseguir com o fork se for o comando 'cd'
+    }
+
+    // Para outros comandos, cria um processo filho
     pid = fork();
+
     if (pid == 0) {
-        // Processo filho executa o comando
+        // Processo filho: executa o comando
         if (execvp(args[0], args) == -1) {
             perror("Erro na execução");
         }
@@ -18,7 +33,7 @@ void execute_command(char **args) {
         // Erro no fork
         perror("Erro ao criar processo");
     } else {
-        // Processo pai espera o filho terminar
+        // Processo pai: espera o filho terminar
         do {
             waitpid(pid, &status, WUNTRACED);
         } while (!WIFEXITED(status) && !WIFSIGNALED(status));
