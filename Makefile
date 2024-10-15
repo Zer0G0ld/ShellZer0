@@ -40,6 +40,10 @@ $(TARGET): $(OBJ)
 $(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Regra para compilar um único arquivo
+single: $(OBJ_DIR)/exec.o
+	$(CC) $(CFLAGS) -o exec_test $(OBJ_DIR)/exec.o $(LDFLAGS)
+
 # Limpeza dos arquivos gerados
 clean:
 	rm -rf build $(TARGET)

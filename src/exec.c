@@ -3,6 +3,20 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <string.h>
+#include "stat.h"
+
+void file_info(char *filename) {
+    struct stat filestat;
+    if (stat(filename, &filestat) == -1) {
+        perror("Erro ao obter informações do arquivo");
+        return;
+    }
+
+    printf("Tamanho: %ld bytes\n", filestat.st_size);
+    printf("Permissões: %o\n", filestat.st_mode & 0777);
+    printf("Número de links: %ld\n", filestat.st_nlink);
+}
+
 
 void execute_command(char **args) {
     pid_t pid;
