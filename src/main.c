@@ -27,8 +27,8 @@ void display_welcome_message() {
         char *user = getenv("USER");
         if (!user) user = "Zer0";  // Usuário padrão
 
-        printf("┌──(%s㉿%s)-[%s]\n", user, user, cwd);
-        printf("└─$\n");
+//        printf("┌──(%s㉿%s)-[%s]\n", user, user, cwd);
+//        printf("└─$\n");
     } else {
         perror("getcwd");
     }
@@ -57,13 +57,14 @@ int main() {
                 if (*last_dir == '/') last_dir++;  // Remove a barra inicial se houver
 
                 // Exibe o prompt com ~ para o diretório HOME
-                printf("%s@~/%s$ ", user, last_dir);
+                printf("┌──(%s㉿%s)-[%s]\n", user, user, last_dir);
+                printf("└─$ ");
             } else {
                 // Exibe o caminho completo caso não seja o HOME
                 last_dir = strrchr(cwd, '/');
                 if (last_dir != NULL) last_dir++;  // Pega apenas o último diretório
-
-                printf("%s@%s$ ", user, last_dir);
+                printf("┌──(%s㉿%s)-[%s]\n", user, user, last_dir);
+                printf("└─$ ");
             }
         } else {
             perror("getcwd");
