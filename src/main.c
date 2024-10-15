@@ -8,6 +8,29 @@
 void execute_command(char **args);
 char **parse_input(char *input);
 
+// Função para exibir a mensagem personalizada
+void display_welcome_message() {
+    printf("┏━(Mensagem dos desenvolvedores do Zer0)\n");
+    printf("┃\n");
+    printf("┃ Esta é uma instalação mínima do ShellZer0, você provavelmente\n");
+    printf("┃ deseja instalar ferramentas complementares. Saiba como:\n");
+    printf("┃ ⇒ https://github.com/Zer0G0ld/ShellZer0\n");
+    printf("┃\n");
+    printf("┗━(Execute: “touch ~/.zer0login” para ocultar esta mensagem)\n");
+
+    // Exibe informações do sistema
+    char cwd[1024];
+    if (getcwd(cwd, sizeof(cwd)) != NULL) {
+        char *user = getenv("USER");
+        if (!user) user = "Zer0";  // Usuário padrão
+
+        printf("┌──(%s㉿%s)-[%s]\n", user, user, cwd);
+        printf("└─$\n");
+    } else {
+        perror("getcwd");
+    }
+}
+
 int main() {
     char *input;
     char **args, cwd[1024], *home, *last_dir;
@@ -17,6 +40,9 @@ int main() {
     if (getuid() == 0) user = "root";  // Se for root, altera o nome do usuário
 
     home = getenv("HOME");  // Pega o diretório HOME
+
+    // Exibe a mensagem personalizada no início
+    display_welcome_message();
 
     while (1) {
         // Obtém o diretório atual
@@ -42,12 +68,23 @@ int main() {
         // Use readline para capturar a entrada do usuário com histórico
         input = readline("");  // Exibe o prompt
 
+        // Se o input for NULL, significa que houve erro ou EOF
+        if (!input) {
+            printf("Erro ou EOF detectado. Saindo...\n");
+            break;
+        }
+
         // Adiciona o comando ao histórico, se não for nulo ou vazio
         if (input && *input) {
             add_history(input);
         }
 
         args = parse_input(input);
+
+        if (args[0] == NULL) {
+            free(input);  // Libera a memória de input
+            continue;     // Ignora entradas vazias
+        }
 
         if (strcmp(args[0], "exit") == 0) {
             free(input);
@@ -56,10 +93,15 @@ int main() {
 
         execute_command(args);
 
-        free(args);  // Libera a memória dos argumentos
-        free(input);  // Libera a memória de input
+        // Libera a memória dos argumentos
+        for (int i = 0; args[i] != NULL; i++) {
+            free(args[i]);
+        }
+        free(args);  // Libera o array de argumentos
+
+        // Só libera 'input' uma vez, ao final do loop
+        free(input);
     }
 
     return 0;
 }
-
