@@ -12,7 +12,7 @@ Shell Zero é uma shell personalizada, desenvolvida para ser simples, mas funcio
 Com comandos internos, suporte a atalhos de teclado (Ctrl+C, Ctrl+D, etc.) e funcionalidades básicas de navegação e execução de programas, o projeto é ideal para aprendizado e experimentação em ambientes Unix-like.
 
 ---
-
+ 
 ## Índice
 
 - [Sobre](#sobre)
