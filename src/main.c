@@ -4,8 +4,8 @@
 #include <unistd.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include <signal.h>  
-#include "parser.h"  
+#include <signal.h>
+#include "parser.h"
 
 // Declaração do protótipo de parse_input
 char **parse_input(char *input);
@@ -27,9 +27,6 @@ void display_welcome_message() {
     if (getcwd(cwd, sizeof(cwd)) != NULL) {
         char *user = getenv("USER");
         if (!user) user = "Zer0";  // Usuário padrão
-
-//        printf("┌──(%s㉿%s)-[%s]\n", user, user, cwd);
-//        printf("└─$\n");
     } else {
         perror("getcwd");
     }
@@ -40,7 +37,39 @@ void handle_sigint(int sig) {
     printf("\nInterrupção recebida (Ctrl+C). Digite 'exit' para sair.\n");
 }
 
-// Função main sem a definição de parse_input
+// Função para carregar o arquivo .zer0rc
+void load_zer0rc() {
+    char* home = getenv("HOME");  // Obtém o diretório do usuário
+    if (!home) {
+        printf("Diretório HOME não encontrado. Configuração não carregada.\n");
+        return;
+    }
+
+    char path[256];
+    snprintf(path, sizeof(path), "%s/.zer0rc", home);  // Monta o caminho para .zer0rc
+
+    FILE *file = fopen(path, "r");
+    if (file) {
+        printf("Carregando configuração de %s\n", path);
+        char line[256];
+        while (fgets(line, sizeof(line), file)) {
+            // Implementa o parsing das linhas do .zer0rc
+            if (strncmp(line, "export ", 7) == 0) {
+                char* var = strtok(line + 7, "=");
+                char* value = strtok(NULL, "\n");
+                if (var && value) {
+                    setenv(var, value, 1);  // Seta a variável de ambiente
+                }
+            }
+            // Adicionar mais parsing para outras instruções, se necessário
+        }
+        fclose(file);
+    } else {
+        printf("Arquivo .zer0rc não encontrado. Nenhuma configuração carregada.\n");
+    }
+}
+
+// Função principal
 int main() {
     char *input;
     char **args, cwd[1024], *home, *last_dir;
@@ -53,6 +82,9 @@ int main() {
 
     // Exibe a mensagem personalizada no início
     display_welcome_message();
+
+    // Carrega as configurações do .zer0rc, se existir
+    load_zer0rc();
 
     // Captura o sinal SIGINT (Ctrl+C)
     signal(SIGINT, handle_sigint);
@@ -119,3 +151,4 @@ int main() {
 
     return 0;
 }
+
