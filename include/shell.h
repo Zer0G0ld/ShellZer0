@@ -3,7 +3,6 @@
 
 // Declarações de funções
 void execute_command(char **args);
-char **parse_input(char *input);
 
 #endif
 

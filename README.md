@@ -13,6 +13,13 @@ Com comandos internos, suporte a atalhos de teclado (Ctrl+C, Ctrl+D, etc.) e fun
 
 Usado no Sistema [Zer0S](https://github.com/Zer0G0ld/Zer0S).
 
+As bases que passei a usar para criar e melhorar este Shell são:
+
+1. **Interface de comandos eficiente:** Foco em capturar e interpretar comandos com boas funcionalidades como histórico, autocomplete e suporte a scripts.
+2. **Execução de comandos:** Fazer o shell executar programas externos como ls, cd, pwd, etc.
+3. **Automação e personalização:** Como permitir que os usuários criem scripts e aliases para suas tarefas.
+4. **Extensibilidade:** Opção de personalizar o shell (com arquivos de configuração .zer0rc, por exemplo) e melhorar a interface.
+
 ---
  
 ## Índice
@@ -148,3 +155,11 @@ Se quiser contribuir com o desenvolvimento da Shell Zero, siga estes passos:
 ## Licença
 
 Este projeto é licenciado sob a [Licença Apache 2.0](LICENSE).
+
+----
+
+### Proximas Melhorias 
+#### Melhorias que podem ser implementadas:
+1. Criação automática do .zer0rc: Se o arquivo não existir, o ShellZer0 pode perguntar ao usuário se ele gostaria de criá-lo.
+2. Maior integração com o ambiente do sistema: Como lidar com variáveis de ambiente e redirecionamento de I/O para simular um terminal mais completo.
+
