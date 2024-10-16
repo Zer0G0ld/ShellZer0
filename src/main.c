@@ -20,7 +20,7 @@ void display_welcome_message() {
     printf("┃ deseja instalar ferramentas complementares. Saiba como:\n");
     printf("┃ ⇒ https://github.com/Zer0G0ld/ShellZer0\n");
     printf("┃\n");
-    printf("┗━(Execute: “touch ~/.zer0login” para ocultar esta mensagem)\n");
+    printf("┗━(Execute: “touch ~/.zer0rc” para ocultar esta mensagem)\n");
 
     // Exibe informações do sistema
     char cwd[1024];

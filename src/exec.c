@@ -17,7 +17,7 @@ void file_info(char *filename) {
 
     printf("Tamanho: %ld bytes\n", filestat.st_size);
     printf("Permissões: %o\n", filestat.st_mode & 0777);
-    printf("Número de links: %ld\n", filestat.st_nlink);
+    printf("Número de links: %u\n", filestat.st_nlink);
 }
 
 // Função para execução com redirecionamento
