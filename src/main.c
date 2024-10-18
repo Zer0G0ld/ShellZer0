@@ -6,6 +6,7 @@
 #include <readline/history.h>
 #include <signal.h>
 #include "parser.h"
+#include "colors.h"
 
 // Prototipos de funções
 char **parse_input(char *input);
@@ -26,13 +27,13 @@ Alias *alias_list = NULL;
 
 // Função para exibir a mensagem de boas-vindas
 void display_welcome_message() {
-    printf("┏━(Mensagem dos desenvolvedores do Zer0)\n");
-    printf("┃\n");
-    printf("┃ Esta é uma instalação mínima do ShellZer0, você provavelmente\n");
-    printf("┃ deseja instalar ferramentas complementares. Saiba como:\n");
-    printf("┃ ⇒ https://github.com/Zer0G0ld/ShellZer0\n");
-    printf("┃\n");
-    printf("┗━(Execute: “nano ~/.zer0rc” para editar o shell)\n");
+    printf(BLUE "┏━(Mensagem dos desenvolvedores do Zer0)\n"RESET);
+    printf(BLUE"┃\n"RESET);
+    printf(BLUE"┃ Esta é uma instalação mínima do ShellZer0, você provavelmente\n"RESET);
+    printf(BLUE"┃ deseja instalar ferramentas complementares. Saiba como:\n"RESET);
+    printf(BLUE"┃ ⇒ https://github.com/Zer0G0ld/ShellZer0\n"RESET);
+    printf(BLUE"┃\n"RESET);
+    printf(BLUE"┗━(Execute: “nano ~/.zer0rc” para editar o shell)\n"RESET);
 
     // Exibe o diretório atual e o usuário
     char cwd[1024];
@@ -45,7 +46,7 @@ void display_welcome_message() {
 
 // Função para tratar o sinal SIGINT (Ctrl+C)
 void handle_sigint(int sig) {
-    printf("\nInterrupção recebida (Ctrl+C). Digite 'exit' para sair.\n");
+    printf(BG_RED"\nInterrupção recebida (Ctrl+C). Digite 'exit' para sair.\n"RESET);
 }
 
 // Função para carregar o arquivo .zer0rc
